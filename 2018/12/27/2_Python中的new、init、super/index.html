@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>Python中的new、init、super | Sxnys Notes</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Python中的new、init、super | Sxnys Notes">
+    <meta name="twitter:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Python中的new、init、super | Sxnys Notes">
+    <meta property="og:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    
+    <meta name="author" content="Sxnys">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/favicon.jpg">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="http://yoursite.com/2018/12/27/2_Python中的new、init、super/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Sxnys Notes 的主页"><img src="/images/logo.jpg" width="80" alt="Sxnys Notes logo" class="panel-cover__logo logo"></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Sxnys Notes">Sxnys Notes</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">人生苦短</span>
+        
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">好高骛远，一事无成<br>我想学Python</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+  <li class="navigation__item">
+    <a href="https://weibo.com/u/3926121193" title="Weibo" target="_blank">
+      <i class="social fa fa-weibo"></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li> 
+
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/sxnhys" title="GitHub" target="_blank">
+      <i class="social fa fa-github"></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-12-27T11:40:41.237Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Python/">Python</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">Python中的new、init、super</h1>
+  </header>
+
+  <section class="post">
+    <hr>
+<h2 id="new-VS-init"><a href="#new-VS-init" class="headerlink" title="__new__ VS __init__"></a><strong><code>__new__</code> VS <code>__init__</code></strong></h2><ol>
+<li>&nbsp;<code>__new__</code> 是一个静态方法, <code>__init__</code> 是一个实例方法</li>
+<li>&nbsp;<code>__new__</code> 方法会返回一个创建的实例, <code>__init__</code> 什么都不返回</li>
+<li>&nbsp;只有在 <code>__new__</code> 返回一个 <code>cls</code> 的实例时, <code>__init__</code> 才能被调用</li>
+<li>&nbsp;当创建一个新实例时调用 <code>__new__</code>, 初始化一个实例时用 <code>__init__</code></li>
+<li>&nbsp;按照其他OOP语言的说法, <code>__init__</code> 就是构造方法; 更准确地说, <code>__new__</code> 才是真正的构造方法, <code>__init__</code> 是初始化方法</li>
+</ol>
+<blockquote>
+<p>python3所定义的类都是新式类；Python2需要继承 object，即   </p>
+</blockquote>
+<pre><code># - py3 -
+class A: pass
+# - py2 -
+class A(object): pass
+</code></pre><hr>
+<h2 id="super"><a href="#super" class="headerlink" title="super"></a><strong>super</strong></h2><p><code>super([type [,object-or-type]])</code><br><br></p>
+<p>返回一个代理对象, 这个对象负责将方法调用<strong>分配给第一个参数的一个父类或者同辈的类</strong>去完成</p>
+<ul>
+<li>super是用于调用父类(超类)的一个方法，但其实super是一个类</li>
+<li><code>super(typeA)</code> – 仅仅是创建了super的一个子类，没有对象绑定   </li>
+</ul>
+<p>以下是得到<strong>绑定指定对象</strong>父类，指定对象即obj / type2 , 如 self / cls</p>
+<ul>
+<li><code>super(type, obj)</code> – <code>isinstance(obj, type)</code>需要是True；如 <code>super(__class__, self)</code></li>
+<li><code>super(type1, type2)</code> – <code>issubclass(type2, type1)</code>需要是True；如 <code>super(__class__, cls)</code>   </li>
+</ul>
+<p>Python 3 可以使用直接使用 <code>super().xxx</code> 代替 <code>super(Class, self).xxx</code></p>
+<pre><code># - py3 -
+class B(A):
+    def __init__(self, *args):
+        super().__init__(*args)
+
+# - py2 -
+    class B(A):
+    def __init__(self, *args):
+        super(B, self).__init__(*args)
+</code></pre><p>需要注意的是<br><code>super().__new__(cls)</code>需要传 cls 参数，这是因为 <code>__new__</code> 方法是静态方法，不能像 <code>super().__init__()</code> 一样，因为 super 对象已经绑定了 self 就不给 <code>__init__()</code> 传 self 了   </p>
+<p><br></p>
+<p><code>super(__class__, cls)</code> 不理解的话就类比 <code>super(__class__, self)</code> ；<code>cls</code>与<code>self</code>类似，也是约定的变量，<code>self</code>表示当前对象，<code>__init__</code>方法的第一个参数；<code>cls</code>表示当前类，<code>__new__</code>方法的第一个参数；<code>__class__</code>可以换成当前定义类的类名，或者<code>self.__class__</code>，或者 <code>type(self)</code></p>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Newer Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/12/27/3_Python多线程、多进程、协程/" title="Python多线程、多进程、协程">Python多线程、多进程、协程</a></h2>
+                <p class="excerpt">
+                
+                
+
+进程 ：对于操作系统来说，一个任务就是一个进程（Process）线程 ：一个进程可能需要做很多事，就需要同时运行多个“子任务”，进程内的这些“子任务”称为线程（Thread）
+
+
+多进程过去的单核CPU，也可以执行多任务，表面上每个任务都是交替执行的，但是由于CPU的执行速度太快，感觉就像所有任
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-12-27T11:40:41.243Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2018/12/27/3_Python多线程、多进程、协程/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/12/27/1_Python数据模型/" title="Python数据模型">Python数据模型</a></h2>
+                <p class="excerpt">
+                
+                
+
+理解好Python的数据模型才是真正理解了Python这门语言
+
+
+
+Python数据模型其实就是 对象模型，数据模型是对Python框架的描述，规范了Python自身构建模块的接口，数据模型体现了Python的设计思想，理解好就能写出 Pythonic 代码。类似于经常用到的 len(some
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-12-27T11:38:55.204Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2018/12/27/1_Python数据模型/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+    
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>

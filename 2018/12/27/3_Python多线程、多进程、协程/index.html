@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>Python多线程、多进程、协程 | Sxnys Notes</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Python多线程、多进程、协程 | Sxnys Notes">
+    <meta name="twitter:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Python多线程、多进程、协程 | Sxnys Notes">
+    <meta property="og:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    
+    <meta name="author" content="Sxnys">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/favicon.jpg">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="http://yoursite.com/2018/12/27/3_Python多线程、多进程、协程/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Sxnys Notes 的主页"><img src="/images/logo.jpg" width="80" alt="Sxnys Notes logo" class="panel-cover__logo logo"></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Sxnys Notes">Sxnys Notes</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">人生苦短</span>
+        
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">好高骛远，一事无成<br>我想学Python</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+  <li class="navigation__item">
+    <a href="https://weibo.com/u/3926121193" title="Weibo" target="_blank">
+      <i class="social fa fa-weibo"></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li> 
+
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/sxnhys" title="GitHub" target="_blank">
+      <i class="social fa fa-github"></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-12-27T11:40:41.243Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Python/">Python</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">Python多线程、多进程、协程</h1>
+  </header>
+
+  <section class="post">
+    <hr>
+<blockquote>
+<p><strong>进程</strong> ：对于操作系统来说，一个任务就是一个进程（Process）<br><strong>线程</strong> ：一个进程可能需要做很多事，就需要同时运行多个“子任务”，进程内的这些“子任务”称为线程（Thread）</p>
+</blockquote>
+<hr>
+<h2 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a><strong>多进程</strong></h2><p>过去的单核CPU，也可以执行多任务，表面上每个任务都是交替执行的，但是由于CPU的执行速度太快，感觉就像所有任务都在同时执行一样。<strong>真正的并行执行多任务只能在多核CPU上实现</strong>。</p>
+<p><br></p>
+<p>Unix/Linux操作系统提供了 <code>fork()</code> 系统调用，调用一次，返回两次，因为操作系统自动把当前进程（父进程）复制了一份（子进程），分别在父进程和子进程内返回。子进程永远返回0，而父进程返回子进程的ID。一个父进程可以fork出很多子进程，所以，父进程要记下每个子进程的ID，而子进程只需要调用 <code>getppid()</code> 就可以拿到父进程的ID。</p>
+<p><br></p>
+<p>由于Windows没有fork调用，python提供 <code>multiprocessing</code> 模块实现跨平台版本的多进程。</p>
+<hr>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a><strong>多线程</strong></h2><p>每个进程至少要干一件事，所以一个进程至少有一个线程（主线程）。多个线程可以同时执行，与多进程是一样也是由操作系统在多个线程之间快速切换，让每个线程都短暂地交替运行，看似同时执行一样。<strong>真正地同时执行多线程需要多核CPU才可能实现</strong>。</p>
+<p><br></p>
+<p>高级语言通常都内置多线程的支持，Python的线程是真正的Posix Thread，而不是模拟出来的线程。Python提供 <code>threading</code> 模块实现多线程。</p>
+<p><br></p>
+<p>多线程和多进程最大的不同在于，<strong>多进程中同一个变量各自有一份拷贝存在于每个进程中</strong>，互不影响，而<strong>多线程中所有变量都由所有线程共享</strong>，所以任何一个变量都可以被任何一个线程修改，因此线程之间共享数据最大的危险在于多个线程同时改一个变量，需要创建线程锁 <code>threading.Lock()</code>。</p>
+<h3 id="Python-全局线程锁（GIL）"><a href="#Python-全局线程锁（GIL）" class="headerlink" title="Python 全局线程锁（GIL）"></a>Python 全局线程锁（GIL）</h3><p>Python的线程虽然是真正的线程，但解释器执行代码时，有一个GIL锁：任何Python线程执行前，必须先获得GIL锁，然后，每执行100条字节码，解释器就自动释放GIL锁，让别的线程有机会执行。这个GIL全局锁实际上把所有线程的执行代码都给上了锁，所以<strong>多线程在Python中只能交替执行</strong>，即n个线程跑在n核CPU上，也只能用到1个核。</p>
+<hr>
+<h2 id="多进程-PK-多线程"><a href="#多进程-PK-多线程" class="headerlink" title="多进程 PK 多线程"></a><strong>多进程 <em>PK</em> 多线程</strong></h2><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">多进程</th>
+<th style="text-align:center">多线程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>优点</strong></td>
+<td style="text-align:center">稳定性高</td>
+<td style="text-align:center">效率更高</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>缺点</strong></td>
+<td style="text-align:center">创建进程的代价大</td>
+<td style="text-align:center">稳定性差</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p> <strong>多进程中一个子进程崩溃了，不会影响主进程和其他子进程</strong><br> <strong>多线程中任何一个线程挂掉都可能直接造成整个进程崩溃</strong></p>
+</blockquote>
+<h3 id="计算-CPU-密集型任务"><a href="#计算-CPU-密集型任务" class="headerlink" title="计算(CPU)密集型任务"></a>计算(CPU)密集型任务</h3><p>要进行大量的计算，消耗CPU资源，虽然也可以用多任务完成，但是任务越多，花在任务切换的时间就越多，CPU执行任务的效率就越低，所以要最高效地利用CPU，计算密集型任务同时进行的数量应当等于CPU的核心数（<strong>适合多进程</strong>）。对于计算密集型任务，最好用C语言编写，Python这类脚本语言运行效率很低。</p>
+<h3 id="IO密集型任务"><a href="#IO密集型任务" class="headerlink" title="IO密集型任务"></a>IO密集型任务</h3><p>涉及到网络、磁盘IO的任务，CPU消耗很少，任务的大部分时间都在等待IO操作完成。对于IO密集型任务，任务越多，CPU效率越高（但也有一个限度 | <strong>适合多线程</strong>）。常见的大部分任务都是IO密集型任务，如Web应用，最合适的语言就是开发效率最高（代码量最少）的语言，脚本语言是首选。</p>
+<hr>
+<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a><strong>协程</strong></h2><p>由于CPU和IO之间巨大的速度差异，一个任务在执行的过程中大部分时间都在等待IO操作，单进程单线程模型会导致别的任务无法并行执行，因此才需要多进程模型或者多线程模型来支持多任务并发执行。</p>
+<blockquote>
+<p><strong>异步IO</strong> ：当代码需要执行一个耗时的IO操作时，它<strong>只发出IO指令，并不等待IO结果</strong>，然后就去执行其他代码了。一段时间后，当IO返回结果时，再通知CPU进行处理。</p>
+</blockquote>
+<p>异步IO模型需要一个<strong>消息循环</strong>，主线程不断地重复“读取消息-处理消息”这一过程。在异步IO模型下，一个线程就可以同时处理多个IO请求，并且没有切换线程的操作。</p>
+<p><br></p>
+<p>现代操作系统对IO操作已经做了巨大的改进，最大的特点就是支持异步IO。充分利用操作系统提供的异步IO支持，就可以用<strong>单进程单线程模型来执行多任务</strong>，这种全新的模型称为<strong>事件驱动模型</strong>（ngnix）。</p>
+<blockquote>
+<p><strong>协程</strong> ：又称微线程，纤程(Coroutine)。对于Python，<strong>单线程的异步编程模型</strong>称为协程。</p>
+</blockquote>
+<h3 id="协程与多线程相比的优势"><a href="#协程与多线程相比的优势" class="headerlink" title="协程与多线程相比的优势"></a>协程与多线程相比的优势</h3><ul>
+<li><strong>协程的执行效率极高</strong>。子程序切换不是线程切换，而是由程序自身控制，因此<strong>没有线程切换的开销</strong>，线程数量越多，协程的性能优势就越明显。</li>
+<li><strong>不需要多线程的锁机制</strong>。只有一个线程，不存在同时写变量冲突，在协程中控制共享资源不加锁，只需要判断状态就好了，所以执行效率比多线程高很多。</li>
+<li>在多核CPU上采用<strong>多进程+协程</strong>的方式，既充分利用多核，又充分发挥协程的高效率，因此性能极高。</li>
+</ul>
+<hr>
+<h2 id="Python异步编程"><a href="#Python异步编程" class="headerlink" title="Python异步编程"></a><strong>Python异步编程</strong></h2><blockquote>
+<p>Python对协程的支持通过 <strong>生成器（generator）</strong>实现</p>
+</blockquote>
+<p><code>yield</code> 提供对协程的基本支持；<code>gevent</code> 第三方库提供对Python2&amp;3完善的协程支持；Python3.4引入 <code>asyncio</code>，提供内置的异步IO支持。</p>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Newer Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/12/27/4_计算机操作系统 - 概述/" title="计算机操作系统 - 概述">计算机操作系统 - 概述</a></h2>
+                <p class="excerpt">
+                
+                摘自 github CS-Notes - 计算机操作系统
+
+一、基本功能1. 内存管理 *内存分配、地址映射、内存保护与共享、虚拟内存、…
+2. 进程管理 *进程控制、进程同步、进程通信、死锁处理、处理机调度、…
+3. 文件管理文件存储空间管理、目录管理、文件读写管理和保护、…
+4. 设备管理缓冲管
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-12-27T11:44:31.840Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/操作系统/">操作系统</a>
+</span><a class="btn-border-small" href="/2018/12/27/4_计算机操作系统 - 概述/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/12/27/2_Python中的new、init、super/" title="Python中的new、init、super">Python中的new、init、super</a></h2>
+                <p class="excerpt">
+                
+                
+__new__ VS __init__
+&amp;nbsp;__new__ 是一个静态方法, __init__ 是一个实例方法
+&amp;nbsp;__new__ 方法会返回一个创建的实例, __init__ 什么都不返回
+&amp;nbsp;只有在 __new__ 返回一个 cls 的实例时, __init__ 才能被
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-12-27T11:40:41.237Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2018/12/27/2_Python中的new、init、super/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+    
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
