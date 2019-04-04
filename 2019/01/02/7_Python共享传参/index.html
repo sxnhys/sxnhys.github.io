@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>Python共享传参 | Sxnys Notes</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Python共享传参 | Sxnys Notes">
+    <meta name="twitter:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Python共享传参 | Sxnys Notes">
+    <meta property="og:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    
+    <meta name="author" content="Sxnys">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/favicon.jpg">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="http://yoursite.com/2019/01/02/7_Python共享传参/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Sxnys Notes 的主页"><img src="/images/logo.jpg" width="80" alt="Sxnys Notes logo" class="panel-cover__logo logo"></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Sxnys Notes">Sxnys Notes</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">人生苦短</span>
+        
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">好高骛远，一事无成<br>我想学Python</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+  <li class="navigation__item">
+    <a href="https://weibo.com/u/3926121193" title="Weibo" target="_blank">
+      <i class="social fa fa-weibo"></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li> 
+
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/sxnys" title="GitHub" target="_blank">
+      <i class="social fa fa-github"></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">Python共享传参</h1>
+  </header>
+
+  <section class="post">
+    <hr>
+<h2 id="函数的参数作为引用"><a href="#函数的参数作为引用" class="headerlink" title="函数的参数作为引用"></a><strong>函数的参数作为引用</strong></h2><blockquote>
+<p>Python 唯一支持的参数传递是 <strong>共享传参</strong> ，也就是常说的引用传参。<br><em>函数内部的形参是实参的别名</em></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    a += b</span><br><span class="line">    <span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数字，不变</span></span><br><span class="line">x, y = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">f(x, y)</span><br><span class="line">print(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表可变类型，变了</span></span><br><span class="line">x, y = [<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">f(x, y)</span><br><span class="line">print(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 元组不可变类型，不变</span></span><br><span class="line">x, y = (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">f(x, y)</span><br><span class="line">print(x, y)</span><br></pre></td></tr></table></figure>
+<pre><code># Out
+1 2
+[1, 2, 3, 4] [3, 4]
+(1, 2) (3, 4)
+</code></pre><h3 id="函数参数的默认值"><a href="#函数参数的默认值" class="headerlink" title="函数参数的默认值"></a>函数参数的默认值</h3><p><em>避免使用可变类型作为参数的默认值</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HauntedBus</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, passengers=[])</span>:</span></span><br><span class="line">        self.passengers = passengers</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pick</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.passengers.append(name)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">drop</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.passengers.remove(name)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 给定参数没有问题</span></span><br><span class="line">bus1 = HauntedBus([<span class="string">'Alice'</span>, <span class="string">'Bob'</span>])</span><br><span class="line">print(bus1.passengers)</span><br><span class="line"></span><br><span class="line">bus1.pick(<span class="string">'Canny'</span>)</span><br><span class="line">bus1.drop(<span class="string">'Alice'</span>)</span><br><span class="line">bus1.passengers</span><br></pre></td></tr></table></figure>
+<pre><code># Out
+[&apos;Alice&apos;, &apos;Bob&apos;]
+[&apos;Bob&apos;, &apos;Canny&apos;]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用参数的默认值，即 []</span></span><br><span class="line">bus2 = HauntedBus()</span><br><span class="line">bus2.pick(<span class="string">'David'</span>)</span><br><span class="line">bus2.passengers</span><br></pre></td></tr></table></figure>
+<pre><code># Out
+[&apos;David&apos;]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同样使用默认值，问题就来了</span></span><br><span class="line">bus3 = HauntedBus()</span><br><span class="line">bus3.passengers</span><br></pre></td></tr></table></figure>
+<pre><code># Out
+[&apos;David&apos;]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bus3.pick(<span class="string">'Bruce'</span>)</span><br><span class="line">bus2.passengers</span><br></pre></td></tr></table></figure>
+<pre><code># Out
+[&apos;David&apos;, &apos;Bruce&apos;]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bus3.passengers <span class="keyword">is</span> bus2.passengers</span><br></pre></td></tr></table></figure>
+<pre><code># Out
+True
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HauntedBus.__init__.__defaults__</span><br></pre></td></tr></table></figure>
+<pre><code># Out
+([&apos;David&apos;, &apos;Bruce&apos;],)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HauntedBus.__init__.__defaults__[<span class="number">0</span>] <span class="keyword">is</span> bus2.passengers</span><br></pre></td></tr></table></figure>
+<pre><code># Out
+True
+</code></pre><p><code>bus3</code> 按道理使用的是默认值 <code>[]</code>，但是得到的确实 <code>bus2</code> 的 <code>passengers</code> 值，而且它们都是同一个引用。<br><strong>默认值在定义函数时计算</strong>，因此默认值变成了函数对象的属性。<br>如果默认值是可变对象，而且修改了它的值，那么后续的函数调用都会受到影响。</p>
+<h4 id="init-方法应该这样处理默认值，防御可变参数"><a href="#init-方法应该这样处理默认值，防御可变参数" class="headerlink" title="__init__ 方法应该这样处理默认值，防御可变参数"></a><code>__init__</code> 方法应该这样处理默认值，防御可变参数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XXX</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, passengers=None)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> passengers <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            self.passengers = []</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.passengers = list(passengers)   <span class="comment"># 注意不是直接赋值，而是副本赋值，关于是深浅拷贝视情况而定</span></span><br><span class="line">            </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p><strong>除非确实是想修改通过参数传入的对象，否则在类中直接把参数赋值给实例变量之前一定要想清楚，因为这样会为参数对象创建别名。</strong></p>
+<p><br></p>
+<p><a href="https://nbviewer.jupyter.org/github/sxnhys/mypython/blob/master/FluentPython/8_ObjectReferences_Mutability_Recycling/3_function_parameters_as_references.ipynb" target="_blank" rel="noopener">md效果不好，原先是 jupyter notebook 版本</a></p>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Newer Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/6_Python的复制（拷贝）问题/" title="Python的复制（拷贝）问题">Python的复制（拷贝）问题</a></h2>
+                <p class="excerpt">
+                
+                
+
+深浅复制的讨论是基于可变类型的
+
+
+浅复制 复制最外层容器，副本中的元素是源容器中元素的引用 列表浅复制包括 ——   
+
+构造方法
+[:] 切片赋值
+自身的 copy 方法
+copy 模块的 copy 方法
+
+1234567891011121314l1 = [1, 2, [3, 4], (5,
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2019/01/02/6_Python的复制（拷贝）问题/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/8_Python垃圾回收和弱引用/" title="Python垃圾回收和弱引用">Python垃圾回收和弱引用</a></h2>
+                <p class="excerpt">
+                
+                
+垃圾回收
+引用计数 ：CPython 中的主要垃圾回收算法，每个对象都会统计有多少引用指向自己；当引用计数归零时，对象立即销毁。
+分代垃圾回收 ：CPython 2.0 增加的新的算法，用于检测引用循环中涉及的对象组    
+
+即将销毁实例时，解释器会调用 __del__ 方法，给实例最后的机会，
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2019/01/02/8_Python垃圾回收和弱引用/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2019 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+    
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>

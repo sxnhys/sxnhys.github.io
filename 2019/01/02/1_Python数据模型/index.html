@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>Python数据模型 | Sxnys Notes</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Python数据模型 | Sxnys Notes">
+    <meta name="twitter:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Python数据模型 | Sxnys Notes">
+    <meta property="og:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    
+    <meta name="author" content="Sxnys">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/favicon.jpg">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="http://yoursite.com/2019/01/02/1_Python数据模型/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Sxnys Notes 的主页"><img src="/images/logo.jpg" width="80" alt="Sxnys Notes logo" class="panel-cover__logo logo"></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Sxnys Notes">Sxnys Notes</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">人生苦短</span>
+        
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">好高骛远，一事无成<br>我想学Python</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+  <li class="navigation__item">
+    <a href="https://weibo.com/u/3926121193" title="Weibo" target="_blank">
+      <i class="social fa fa-weibo"></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li> 
+
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/sxnys" title="GitHub" target="_blank">
+      <i class="social fa fa-github"></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">Python数据模型</h1>
+  </header>
+
+  <section class="post">
+    <hr>
+<blockquote>
+<p>理解好Python的数据模型才是真正理解了Python这门语言</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Python数据模型其实就是 <strong>对象模型</strong>，<strong>数据模型是对Python框架的描述，规范了Python自身构建模块的接口</strong>，数据模型体现了Python的设计思想，理解好就能写出 <strong>Pythonic</strong> 代码。<br><br>类似于经常用到的 <strong><code>len(something)</code></strong> 背后调用的是 <strong><code>something.__len__</code></strong> 方法，<strong><code>obj[key]</code></strong> 背后调用的是 <strong><code>obj.__getitem__</code></strong> 方法等等，这些方法就是构建Python数据模型的关键，它们称为 <strong>特殊方法</strong>（魔术方法或双下方法）。</p>
+</blockquote>
+<hr>
+<h2 id="Pythonic-纸牌"><a href="#Pythonic-纸牌" class="headerlink" title="Pythonic 纸牌"></a><strong>Pythonic 纸牌</strong></h2><p><em>Fluent Python 中对于 Python 特殊方法的代码示例</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import collections</span><br><span class="line">from random import choice</span><br><span class="line"></span><br><span class="line"># namedtuple用来构建只有少数属性但是没有方法的对象</span><br><span class="line"># 访问其中的属性，可以像元组那样使用索引，也可以像一般对象那样使用点操作符(.)</span><br><span class="line">Card = collections.namedtuple(&apos;Card&apos;, [&apos;rank&apos;, &apos;suit&apos;])</span><br><span class="line"></span><br><span class="line">class FrenchDeck:</span><br><span class="line">    ranks = [str(i) for i in range(2, 11)] + list(&apos;JQKA&apos;)</span><br><span class="line">    suits = &apos;spades diamonds clubs hearts&apos;.split()</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        self._cards = [Card(rank, suit) for suit in self.suits for rank in self.ranks]</span><br><span class="line"></span><br><span class="line">    def __len__(self):</span><br><span class="line">        return len(self._cards)</span><br><span class="line"></span><br><span class="line">    # 可以利用索引查找元素，而且使得它的对象可迭代</span><br><span class="line">    def __getitem__(self, pos):</span><br><span class="line">        return self._cards[pos]</span><br><span class="line"></span><br><span class="line">    def __repr__(self):</span><br><span class="line">        return </span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    deck = FrenchDeck()</span><br><span class="line">    print(len(deck))</span><br><span class="line"></span><br><span class="line">    # 打印第一张、最后一张、最上面三张、花色是A的扑克牌</span><br><span class="line">    print(deck[0], deck[-1], deck[:3], deck[12::13], sep=&apos;\n&apos;)</span><br><span class="line"></span><br><span class="line">    # 随机选择一个元素</span><br><span class="line">    print(choice(deck))</span><br><span class="line"></span><br><span class="line">    # 打印每一张牌，打印数字，打印花色</span><br><span class="line">    for card in deck:</span><br><span class="line">        print(card, card[0], card.suit)</span><br><span class="line">    </span><br><span class="line">    # 扑克牌排序</span><br><span class="line">    suit_values = dict(spades = 3, hearts = 2, diamonds = 1, clubs = 0)</span><br><span class="line">    def spades_high(card):</span><br><span class="line">        rank_value = FrenchDeck.ranks.index(card.rank)</span><br><span class="line">        return len(suit_values) * rank_value + suit_values[card.suit]</span><br><span class="line">    for card in sorted(deck, key=spades_high):</span><br><span class="line">        print(card)</span><br></pre></td></tr></table></figure>
+<p>可以看到仅仅这些特殊方法就让对象的操作十分简便，特别是定义了 <strong><code>__getitem__</code></strong> 方法就可以实现对象的 <strong>迭代</strong> 和 <strong>切片</strong> 操作，这个示例不仅体现了Python面向对象的风格，也是体现出Python的核心语言特(如迭代和切片)</p>
+<hr>
+<h2 id="自定义二维向量"><a href="#自定义二维向量" class="headerlink" title="自定义二维向量"></a><strong>自定义二维向量</strong></h2><p><em>关于运算符的特殊方法</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">﻿from math import hypot 	 # 两个数平方和开方</span><br><span class="line"></span><br><span class="line">class Vector():</span><br><span class="line">    def __init__(self, x=0, y=0):</span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line">    def __repr__(self):     # 字符串表示形式</span><br><span class="line">        return &apos;Vector(%r, %r)&apos; % (self.x, self.y)</span><br><span class="line"></span><br><span class="line">    def __abs__(self):</span><br><span class="line">        return hypot(self.x, self.y)</span><br><span class="line"></span><br><span class="line">    def __bool__(self):</span><br><span class="line">        return bool(abs(self))</span><br><span class="line">        # OR return bool(self.x or self.y)</span><br><span class="line"></span><br><span class="line">    def __add__(self, other):</span><br><span class="line">        return Vector(self.x + other.x, self.y + other.y)</span><br><span class="line"></span><br><span class="line">    def __mul__(self, scalar):</span><br><span class="line">        return Vector(self.x * scalar, self.y * scalar)</span><br></pre></td></tr></table></figure></p>
+<p>这里通过 <strong><code>__add__</code></strong> 和 <strong><code>__mul__</code></strong> 方法分别实现了自定义二维向量的对于 + 和 * 算数运算符的使用，同时 <strong><code>__abs__</code></strong> 实现了向量的模，<strong><code>__bool__</code></strong> 实现判断向量是否为零向量。</p>
+<hr>
+<h2 id="特殊方法一览"><a href="#特殊方法一览" class="headerlink" title="特殊方法一览"></a><strong>特殊方法一览</strong></h2><ol>
+<li><p><strong>与运算符无关的特殊方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">﻿字符串/字节序列表示形式 ： __repr__、__str__、__format__、__bytes__</span><br><span class="line">数值转换 ： __abs__、__bool__、__complex__、__int__、__float__、__hash__、__index__</span><br><span class="line">集合模拟 ： __len__、__getitem__、__setitem__、__delitem__、__contains__</span><br><span class="line">迭代枚举 ： __iter__、__reversed__、__next__</span><br><span class="line">可调用模拟 ： __call__</span><br><span class="line">上下文管理 ： __enter__、__exit__</span><br><span class="line">实例创建和销毁 ： __new__、__init__、__del__</span><br><span class="line">属性管理 ： __getattr__、__getattribute__、__setattr__、__delattr__、__dir__</span><br><span class="line">属性描述符 ： __get__、__set__、__delete__</span><br><span class="line">类相关的服务 ： __prepare__、__instancecheck__、__subclasscheck__</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>与运算符有关的特殊方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">一元运算符 ： __neg__  - 、__pos__  + 、__abs__  abs()</span><br><span class="line">比较运算符 ： __lt__  &lt; 、__le__  &lt;= 、__eq__  == 、__ne__  != 、__gt__  &gt; 、__ge__  &gt;=</span><br><span class="line">算术运算符 ： __add__  + 、__sub__  - 、__mul__  * 、__truediv__  / 、__floordiv__  // 、__mod__  % 、__divmod__  divmod() 、__pow__  ** 、__round__  round()</span><br><span class="line">反向算术运算符 ： __radd__、__rsub__、__rmul__、__rtruediv__、__rfloordiv__、__rmod__、__rdivmod__、__rpow__</span><br><span class="line">增量赋值算术运算符 ： __iadd__、__isub__、__imul__、__itruediv__、__ifloordiv__、__imod__、__ipow__</span><br><span class="line">位运算符 ： __invert__  ~ 、__lshift__  &lt;&lt; 、__rshift__  &gt;&gt; 、__and__  &amp; 、__or__  \： 、__xor__  ^</span><br><span class="line">反向位运算符 ： __rlshift__、__rrshift__、__rand__、__ror__、__rxor__</span><br><span class="line">增量赋值位运算符 ： __ilshift__、__irshift__、__iand__、__ior__、__ixor__</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h2><p>数据模型是Python风格的体现，特殊方法又是数据模型构建的关键，通过实现特殊方法，自定义的数据类型可以像内置类型一样随心所欲。特殊方法这么多，当然是遇则熟然则疏，没有必要去记住所有，当需要用到的时候自然就认识它了。</p>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Newer Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/9_符合Python风格的对象/" title="符合Python风格的对象">符合Python风格的对象</a></h2>
+                <p class="excerpt">
+                
+                
+基于 Python 的数据模型，自定义类型可以实现和内置类型一样自然的行为，实际上靠的是 鸭子类型。
+
+鸭子类型：按照预定行为实现对象所需的方法
+
+0、最初的Vector类12345678910111213141516171819202122from math import hypot 	 # 两
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2019/01/02/9_符合Python风格的对象/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/6_Python的复制（拷贝）问题/" title="Python的复制（拷贝）问题">Python的复制（拷贝）问题</a></h2>
+                <p class="excerpt">
+                
+                
+
+深浅复制的讨论是基于可变类型的
+
+
+浅复制 复制最外层容器，副本中的元素是源容器中元素的引用 列表浅复制包括 ——   
+
+构造方法
+[:] 切片赋值
+自身的 copy 方法
+copy 模块的 copy 方法
+
+1234567891011121314l1 = [1, 2, [3, 4], (5,
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2019/01/02/6_Python的复制（拷贝）问题/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2019 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+    
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>

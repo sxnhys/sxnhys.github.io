@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     
-    <title>Python中的new、init、super | Sxnys Notes</title>
+    <title>Sxnys Notes | 人生苦短</title>
     <meta name="renderer" content="webkit">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -15,11 +15,11 @@
     <meta name="description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Python中的new、init、super | Sxnys Notes">
+    <meta name="twitter:title" content="Sxnys Notes | 人生苦短">
     <meta name="twitter:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Python中的new、init、super | Sxnys Notes">
+    <meta property="og:title" content="Sxnys Notes | 人生苦短">
     <meta property="og:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
 
     
@@ -35,7 +35,7 @@
     <meta name="generator" content="hexo"/>
     
 
-    <link rel="canonical" href="http://yoursite.com/2018/12/27/2_Python中的new、init、super/"/>
+    <link rel="canonical" href="http://yoursite.com"/>
 
                  
 </head>
@@ -127,99 +127,103 @@
 
     <div class="content-wrapper">
         <div class="content-wrapper__inner">
-            <article class="post-container post-container--single">
-
-  <header class="post-header">
-    <div class="post-meta">
-      <time datetime="2018-12-27T11:40:41.237Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-meta__tags tags">于 
-  <a class="tag-link" href="/tags/Python/">Python</a>
- </span>
-      <span class="page-pv">
-       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
-      </span> 
-   
-    </div>
-    <h1 class="post-title">Python中的new、init、super</h1>
-  </header>
-
-  <section class="post">
-    <hr>
-<h2 id="new-VS-init"><a href="#new-VS-init" class="headerlink" title="__new__ VS __init__"></a><strong><code>__new__</code> VS <code>__init__</code></strong></h2><ol>
-<li>&nbsp;<code>__new__</code> 是一个静态方法, <code>__init__</code> 是一个实例方法</li>
-<li>&nbsp;<code>__new__</code> 方法会返回一个创建的实例, <code>__init__</code> 什么都不返回</li>
-<li>&nbsp;只有在 <code>__new__</code> 返回一个 <code>cls</code> 的实例时, <code>__init__</code> 才能被调用</li>
-<li>&nbsp;当创建一个新实例时调用 <code>__new__</code>, 初始化一个实例时用 <code>__init__</code></li>
-<li>&nbsp;按照其他OOP语言的说法, <code>__init__</code> 就是构造方法; 更准确地说, <code>__new__</code> 才是真正的构造方法, <code>__init__</code> 是初始化方法</li>
-</ol>
-<blockquote>
-<p>python3所定义的类都是新式类；Python2需要继承 object，即   </p>
-</blockquote>
-<pre><code># - py3 -
-class A: pass
-# - py2 -
-class A(object): pass
-</code></pre><hr>
-<h2 id="super"><a href="#super" class="headerlink" title="super"></a><strong>super</strong></h2><p><code>super([type [,object-or-type]])</code><br><br></p>
-<p>返回一个代理对象, 这个对象负责将方法调用<strong>分配给第一个参数的一个父类或者同辈的类</strong>去完成</p>
-<ul>
-<li>super是用于调用父类(超类)的一个方法，但其实super是一个类</li>
-<li><code>super(typeA)</code> – 仅仅是创建了super的一个子类，没有对象绑定   </li>
-</ul>
-<p>以下是得到<strong>绑定指定对象</strong>父类，指定对象即obj / type2 , 如 self / cls</p>
-<ul>
-<li><code>super(type, obj)</code> – <code>isinstance(obj, type)</code>需要是True；如 <code>super(__class__, self)</code></li>
-<li><code>super(type1, type2)</code> – <code>issubclass(type2, type1)</code>需要是True；如 <code>super(__class__, cls)</code>   </li>
-</ul>
-<p>Python 3 可以使用直接使用 <code>super().xxx</code> 代替 <code>super(Class, self).xxx</code></p>
-<pre><code># - py3 -
-class B(A):
-    def __init__(self, *args):
-        super().__init__(*args)
-
-# - py2 -
-    class B(A):
-    def __init__(self, *args):
-        super(B, self).__init__(*args)
-</code></pre><p>需要注意的是<br><code>super().__new__(cls)</code>需要传 cls 参数，这是因为 <code>__new__</code> 方法是静态方法，不能像 <code>super().__init__()</code> 一样，因为 super 对象已经绑定了 self 就不给 <code>__init__()</code> 传 self 了   </p>
-<p><br></p>
-<p><code>super(__class__, cls)</code> 不理解的话就类比 <code>super(__class__, self)</code> ；<code>cls</code>与<code>self</code>类似，也是约定的变量，<code>self</code>表示当前对象，<code>__init__</code>方法的第一个参数；<code>cls</code>表示当前类，<code>__new__</code>方法的第一个参数；<code>__class__</code>可以换成当前定义类的类名，或者<code>self.__class__</code>，或者 <code>type(self)</code></p>
-
-  </section>
-
-</article>
-
-<section class="read-more">
-           
+            <div class="main-post-list">
     
-               
-            <div class="read-more-item">
-                <span class="read-more-item-dim">Newer Post</span>
-                <h2 class="post-list__post-title post-title"><a href="/2018/12/27/3_Python多线程、多进程、协程/" title="Python多线程、多进程、协程">Python多线程、多进程、协程</a></h2>
-                <p class="excerpt">
-                
-                
+  <ol class="post-list">
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2018/12/27/4_计算机操作系统 - 概述/" title="link to post.title">计算机操作系统 - 概述</a></h2>
+      <p class="excerpt">
+    
+      摘自 github CS-Notes - 计算机操作系统
+
+一、基本功能1. 内存管理 *内存分配、地址映射、内存保护与共享、虚拟内存、…
+2. 进程管理 *进程控制、进程同步、进程通信、死锁处理、处理机调度、…
+3. 文件管理文件存储空间管理、目录管理、文件读写管理和保护、…
+4. 设备管理缓冲管理、设备分配、设备处理、虚拟设备、…(完成用户的I/O请求，方便用户使用各种设备，提高设备利用率)
+
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2018-12-27T11:44:31.840Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/操作系统/">操作系统</a>
+</span><a class="btn-border-small" href="/2018/12/27/4_计算机操作系统 - 概述/">继续阅读</a></div>
+      <hr class="post-list__divider">
+    </li>
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2018/12/27/3_Python多线程、多进程、协程/" title="link to post.title">Python多线程、多进程、协程</a></h2>
+      <p class="excerpt">
+    
+      
 
 进程 ：对于操作系统来说，一个任务就是一个进程（Process）线程 ：一个进程可能需要做很多事，就需要同时运行多个“子任务”，进程内的这些“子任务”称为线程（Thread）
 
 
-多进程过去的单核CPU，也可以执行多任务，表面上每个任务都是交替执行的，但是由于CPU的执行速度太快，感觉就像所有任
-                &hellip;
-                </p>
-                <div class="post-list__meta"><time datetime="2018-12-27T11:40:41.243Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
+多进程过去的单核CPU，也可以执行多任务，表面上每个任务都是交替执行的，但是由于CPU的执行速度太快，感觉就像所有任务都在同时执行一样。真正的并行执行多任务只能在多核CPU上实现。
+
+Unix/Linux操作系统提供
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2018-12-27T11:40:41.243Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
   <a class="tag-link" href="/tags/Python/">Python</a>
 </span><a class="btn-border-small" href="/2018/12/27/3_Python多线程、多进程、协程/">继续阅读</a></div>
-                           
-            </div>
-        
-        
-        
-     
-   
-   
+      <hr class="post-list__divider">
+    </li>
   
-</section>
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2018/12/27/2_Python中的new、init、super/" title="link to post.title">Python中的new、init、super</a></h2>
+      <p class="excerpt">
+    
+      
+__new__ VS __init__
+&amp;nbsp;__new__ 是一个静态方法, __init__ 是一个实例方法
+&amp;nbsp;__new__ 方法会返回一个创建的实例, __init__ 什么都不返回
+&amp;nbsp;只有在 __new__ 返回一个 cls 的实例时, __init__ 才能被调用
+&amp;nbsp;当创建一个新实例时调用 __new__, 初始化一个实例时用 __init__
+&amp;
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2018-12-27T11:40:41.237Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2018/12/27/2_Python中的new、init、super/">继续阅读</a></div>
+      <hr class="post-list__divider">
+    </li>
+  
+    
+  </ol>
 
-  
+
+  <nav class="pagination" role="navigation">
+    
+      <a class="older-posts pagination__newer btn btn-small btn-tertiary" href="/#blog">&larr; Prev</a>
+    
+    <span class="pagination__page-number">  2 / 2 </span>
+    
+  </nav>
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    }); 
+    
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</div>
+
 
             <footer class="footer">
     <span class="footer__copyright">

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>计算机操作系统 - 内存管理 | Sxnys Notes</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="计算机操作系统 - 内存管理 | Sxnys Notes">
+    <meta name="twitter:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="计算机操作系统 - 内存管理 | Sxnys Notes">
+    <meta property="og:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    
+    <meta name="author" content="Sxnys">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/favicon.jpg">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="http://yoursite.com/2019/03/20/11_计算机操作系统 - 内存管理/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Sxnys Notes 的主页"><img src="/images/logo.jpg" width="80" alt="Sxnys Notes logo" class="panel-cover__logo logo"></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Sxnys Notes">Sxnys Notes</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">人生苦短</span>
+        
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">好高骛远，一事无成<br>我想学Python</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+  <li class="navigation__item">
+    <a href="https://weibo.com/u/3926121193" title="Weibo" target="_blank">
+      <i class="social fa fa-weibo"></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li> 
+
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/sxnys" title="GitHub" target="_blank">
+      <i class="social fa fa-github"></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2019-03-20T05:05:37.781Z" class="post-list__meta--date date">2019-03-20</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/操作系统/">操作系统</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">计算机操作系统 - 内存管理</h1>
+  </header>
+
+  <section class="post">
+    <p><em><a href="https://github.com/CyC2018/CS-Notes/blob/master/docs/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.md" title="github CS-Notes - 计算机操作系统" target="_blank" rel="noopener">摘自 github CS-Notes - 计算机操作系统</a></em></p>
+<hr>
+<h2 id="一、虚拟内存"><a href="#一、虚拟内存" class="headerlink" title="一、虚拟内存"></a>一、虚拟内存</h2><p>将物理内存抽象为地址空间，每个进程都有各自的地址空间，地址空间被分割成多个块，<strong>每一块称为一页</strong>。这些页被<strong>映射到物理内存</strong>，但不需要映射到连续的物理内存，也不需要所有页都必须在物理内存中。目的是让物理内存扩充成更大的逻辑内存，从而让程序获得更多的可用内存。</p>
+<p><strong>1、分页系统地址映射</strong></p>
+<p>内存管理单元负责地址空间和物理内存的转换，其中页表存储着<strong>页（程序地址空间）</strong>和<strong>页框（物理内存空间）</strong>的映射表。一个虚拟地址分为<strong>页面号</strong>（16位地址是前4位）和<strong>存储偏移量</strong>。页面号的十进制数对应页表的索引，一个页表项最后一位表示是否存在于内存，前几位即为页框的前几位。</p>
+<p><strong>2、页面置换算法</strong></p>
+<p>在程序运行过程中，如果要访问的页面不在内存中，就发生缺页中断从而<strong>将该页调入内存</strong>中。此时如果内存已无空闲空间，系统必须从内存中<strong>调出一个页面到磁盘对换区</strong>中来腾出空间。</p>
+<p>页面置换算法的主要目的就是<strong>使页面置换频率最低</strong>。</p>
+<ul>
+<li><strong>最佳</strong>（OPT）：所选择的被换出的页面将是最长时间内不再被访问（理论上不知道将来使用页面的情况）           </li>
+<li><strong>最近最久未使用（</strong>LRU）：通过维护链表保证表尾的页面是最近最久未访问的，代价很高            </li>
+<li><strong>最近未使用</strong>：每个页面有 R 和 M 两个状态位           </li>
+<li><strong>先进先出</strong>：选择换出的页面是最先进入的页面         </li>
+<li><strong>第二次机会算法</strong>：在FIFO的基础上，当页面被访问时设置页面的R位为1。FIFO 时若 R 位为 0，直接置换，R位为 1，页面放到队列尾部，继续 FIFO            </li>
+<li><strong>时钟</strong>：第二次机会算法的改进，将队列（链表）的首位相连，通过指针指向 FIFO 的 FI 页面       </li>
+</ul>
+<h2 id="二、分段和段页式"><a href="#二、分段和段页式" class="headerlink" title="二、分段和段页式"></a>二、分段和段页式</h2><p><strong>1、分段 </strong>         </p>
+<p>将地址空间划分为多个拥有独立地址空间的段，每个段的长度可以不同，并且可以动态增长。</p>
+<p><strong>2、段页式</strong>            </p>
+<p>程序的地址空间划分成多个拥有独立地址空间的段，每个段上的地址空间划分成大小相同的页。这样既拥有分段系统的<strong>共享和保护</strong>，又拥有分页系统的<strong>虚拟内存</strong>功能。</p>
+<p><strong>3、分页 VS 分段</strong>               </p>
+<ul>
+<li><p>分页对程序员透明，分段需要程序员显示划分每个段</p>
+</li>
+<li><p>分页是一维地址空间，分段是二维的</p>
+</li>
+<li><p>页的大小不可变，段的大小可以动态改变</p>
+</li>
+<li>分页主要用于实现虚拟内存，从而获得更大的地址空间；分段主要是为了使程序和数据可以被划分为逻辑上独立的地址空间并且有助于共享和保护</li>
+</ul>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Newer Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2019/03/20/12_头条实习面试/" title="字节跳动实习面试">字节跳动实习面试</a></h2>
+                <p class="excerpt">
+                
+                2019.03.06
+生平第一次面试，献给了最想去的宇宙条。基础有点差，补了一个多星期，到面试前脑子还是一片空白，啥都没记住的赶脚，广度优先导致了啥都记不住，深度优先又怕问的都是没遍历的知识。
+总体感觉一般，主要是自己有点差劲，基础不怎么样，连算法也纠结半天，虽是研二，感觉也比不了人家大三的大佬，自
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2019-03-20T05:05:37.782Z" class="post-list__meta--date date">2019-03-20</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/字节跳动/">字节跳动</a>, <a class="tag-link" href="/tags/面试/">面试</a>
+</span><a class="btn-border-small" href="/2019/03/20/12_头条实习面试/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2019/03/20/10_计算机操作系统 - 进程管理/" title="计算机操作系统 - 进程管理">计算机操作系统 - 进程管理</a></h2>
+                <p class="excerpt">
+                
+                摘自 github CS-Notes - 计算机操作系统
+
+一、进程与线程1. 进程进程：资源分配的基本单位进程控制块：PCB (Process Control Block)，描述进程的基本信息和运行状态。创建进程、撤销进程实际上就是对 PCB 的操作。    
+  
+
+上图是 4 个程序创建的 4
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2019-03-20T05:05:37.781Z" class="post-list__meta--date date">2019-03-20</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/操作系统/">操作系统</a>
+</span><a class="btn-border-small" href="/2019/03/20/10_计算机操作系统 - 进程管理/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2019 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+    
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
