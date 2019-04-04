@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>Python 序列的修改、散列、切片 | Sxnys Notes</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Python 序列的修改、散列、切片 | Sxnys Notes">
+    <meta name="twitter:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Python 序列的修改、散列、切片 | Sxnys Notes">
+    <meta property="og:description" content="好高骛远，一事无成&lt;br&gt;我想学Python">
+
+    
+    <meta name="author" content="Sxnys">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/favicon.jpg">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+
+    <link rel="canonical" href="http://yoursite.com/2019/04/04/14_Python 序列的修改、散列、切片/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Sxnys Notes 的主页"><img src="/images/logo.jpg" width="80" alt="Sxnys Notes logo" class="panel-cover__logo logo"></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Sxnys Notes">Sxnys Notes</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">人生苦短</span>
+        
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">好高骛远，一事无成<br>我想学Python</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+  <li class="navigation__item">
+    <a href="https://weibo.com/u/3926121193" title="Weibo" target="_blank">
+      <i class="social fa fa-weibo"></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li> 
+
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/sxnys" title="GitHub" target="_blank">
+      <i class="social fa fa-github"></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2019-04-04T08:10:46.807Z" class="post-list__meta--date date">2019-04-04</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">Python 序列的修改、散列、切片</h1>
+  </header>
+
+  <section class="post">
+    <p><em>在 “符号Python风格对象” 中的二维向量类型的基础，扩展n维向量，并实现基本的序列协议、切片等</em></p>
+<blockquote>
+<p><strong>基本的序列协议： <code>__len__</code>, <code>__getitem__</code></strong></p>
+</blockquote>
+<h2 id="1、多维Vector类"><a href="#1、多维Vector类" class="headerlink" title="1、多维Vector类"></a>1、多维Vector类</h2><blockquote>
+<p>序列类型的构造方法最好接受可迭代对象作为参数（内置序列类型均是如此）</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> array <span class="keyword">import</span> array</span><br><span class="line"><span class="keyword">import</span> reprlib</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vector</span>:</span></span><br><span class="line">    typecode = <span class="string">'d'</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, components)</span>:</span></span><br><span class="line">        self._components = array(self.typecode, components)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> iter(self._components)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        components = reprlib.repr(self._components)   <span class="comment"># array的字符串表现形式如 array([1, 2, ...])</span></span><br><span class="line">        components = components[components.find(<span class="string">'['</span>):<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Vector(&#123;&#125;)'</span>.format(components)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> str(tuple(self))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__bytes__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> bytes([ord(self.typecode)]) + bytes(self._components)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> tuple(self) == tuple(other)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__abs__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> math.sqrt(sum(x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> self))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__bool__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> bool(abs(self))</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">frombytes</span><span class="params">(cls, octets)</span>:</span></span><br><span class="line">        typecode = chr(octets[<span class="number">0</span>])</span><br><span class="line">        memv = memoryview(octets[<span class="number">1</span>:]).cast(typecode)</span><br><span class="line">        <span class="keyword">return</span> cls(memv)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>reprlib.repr()</code> 方法可以获取有限长度的表现形式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v1 = Vector([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">print(v1)</span><br></pre></td></tr></table></figure>
+<pre><code>(1.0, 2.0, 3.0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector(range(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([0.0, 1.0, 2.0, 3.0, 4.0, ...])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector.frombytes(bytes(v1))</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([1.0, 2.0, 3.0])
+</code></pre><h2 id="2、协议和鸭子类型"><a href="#2、协议和鸭子类型" class="headerlink" title="2、协议和鸭子类型"></a>2、协议和鸭子类型</h2><blockquote>
+<p>Python 中创建功能完善的序列类型无需使用继承，只需实现符合<strong>序列协议</strong>的方法，行为像序列那么它就是序列，即鸭子类型。<br>OOP 中，协议是非正式的接口，只有在文档中定义，在代码中不定义。<br>Python 的序列协议只需要 <code>__len__</code> 和 <code>__getitem__</code> 两个方法。</p>
+</blockquote>
+<h2 id="3、可切片的序列-Vector类"><a href="#3、可切片的序列-Vector类" class="headerlink" title="3、可切片的序列 Vector类"></a>3、可切片的序列 Vector类</h2><p>简单地，只需在 Vector 类中实现 <code>__len__</code> 和 <code>__getitem__</code> 两个方法，委托给对象中的序列属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def __len__(self):</span><br><span class="line">    return len(self._components)</span><br><span class="line"></span><br><span class="line">def __getitem__(self, index):</span><br><span class="line">    return self._components[index]</span><br></pre></td></tr></table></figure></p>
+<p>但是这样做有欠缺，得到的切片不是Vector类型，而是数组。<br>内置的序列类型，<strong>切片得到的都是各自类型的新实例</strong>，所以这里不能简单地委托给数组切片。</p>
+<h3 id="3-1-切片原理"><a href="#3-1-切片原理" class="headerlink" title="3.1 切片原理"></a>3.1 切片原理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySeq</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> index</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s = MySeq()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>1
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">1</span>:<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>slice(1, 4, None)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">1</span>:<span class="number">4</span>:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>slice(1, 4, 2)
+</code></pre><p>多维索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">1</span>:<span class="number">4</span>:<span class="number">2</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>(slice(1, 4, 2), 9)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">1</span>:<span class="number">4</span>:<span class="number">2</span>, <span class="number">7</span>:<span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>(slice(1, 4, 2), slice(7, 9, None))
+</code></pre><p><strong><code>slice</code></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir(slice)</span><br></pre></td></tr></table></figure>
+<pre><code>[&apos;__class__&apos;,
+ &apos;__delattr__&apos;,
+ &apos;__dir__&apos;,
+ &apos;__doc__&apos;,
+ &apos;__eq__&apos;,
+ &apos;__format__&apos;,
+ &apos;__ge__&apos;,
+ &apos;__getattribute__&apos;,
+ &apos;__gt__&apos;,
+ &apos;__hash__&apos;,
+ &apos;__init__&apos;,
+ &apos;__init_subclass__&apos;,
+ &apos;__le__&apos;,
+ &apos;__lt__&apos;,
+ &apos;__ne__&apos;,
+ &apos;__new__&apos;,
+ &apos;__reduce__&apos;,
+ &apos;__reduce_ex__&apos;,
+ &apos;__repr__&apos;,
+ &apos;__setattr__&apos;,
+ &apos;__sizeof__&apos;,
+ &apos;__str__&apos;,
+ &apos;__subclasshook__&apos;,
+ &apos;indices&apos;,
+ &apos;start&apos;,
+ &apos;step&apos;,
+ &apos;stop&apos;]
+</code></pre><p><code>slice</code> 是内置的类型，其中 <code>indices</code> 方法，对于长度为 len 的序列，用于处理缺失索引、负数索引、长度超过目标序列的切片。   </p>
+<blockquote>
+<p>如果没有底层序列类型作为依靠，使用 <code>indices</code> 方法能节省大量时间</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">help(slice.indices)</span><br></pre></td></tr></table></figure>
+<pre><code>Help on method_descriptor:
+
+indices(...)
+    S.indices(len) -&gt; (start, stop, stride)
+
+    Assuming a sequence of length len, calculate the start and stop
+    indices, and the stride length of the extended slice described by
+    S. Out of bounds indices are clipped in a manner consistent with the
+    handling of normal slices.
+</code></pre><p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 'ABCDE'[:10:2] &lt;==&gt; 'ABCDE'[0:5:2] </span></span><br><span class="line">slice(<span class="keyword">None</span>, <span class="number">10</span>, <span class="number">2</span>).indices(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>(0, 5, 2)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 'ABCDE'[-3:] &lt;==&gt; 'ABCDE'[2:5:1]</span></span><br><span class="line">slice(<span class="number">-3</span>, <span class="keyword">None</span>, <span class="keyword">None</span>).indices(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>(2, 5, 1)
+</code></pre><h3 id="3-2-处理切片的-getitem-方法"><a href="#3-2-处理切片的-getitem-方法" class="headerlink" title="3.2 处理切片的 __getitem__ 方法"></a>3.2 处理切片的 <code>__getitem__</code> 方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numbers</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">    cls = type(self)</span><br><span class="line">    <span class="comment"># 切片索引，创建一个新 Vector 实例</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(index, slice):</span><br><span class="line">        <span class="keyword">return</span> cls(self._components[index])</span><br><span class="line">    <span class="comment"># 单个索引，只取一个分量</span></span><br><span class="line">    <span class="keyword">elif</span> isinstance(index, numbers.Integral):</span><br><span class="line">        <span class="keyword">return</span> self._components[index]</span><br><span class="line">    <span class="comment"># 不支持多维索引</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        msg = <span class="string">'&#123;cls.__name__&#125; indices must be integers'</span></span><br><span class="line">        <span class="keyword">raise</span> TypeError(msg.format(cls=cls))</span><br></pre></td></tr></table></figure>
+<p><strong><em>完整代码和测试最后给出</em></strong></p>
+<h2 id="4、动态存取属性"><a href="#4、动态存取属性" class="headerlink" title="4、动态存取属性"></a>4、动态存取属性</h2><p>目的：通过特定的名称访问向量的分量，如 <code>v.x</code> 代表 <code>v[0]</code>    </p>
+<ul>
+<li><code>@property</code> 装饰器可以绑定新特性，但是要实现多个属性较麻烦。    </li>
+<li><code>__getattr__</code> 特殊方法，接收属性名称的字符串形式，当属性查找失败，便会调用改方法。<strong>仅当对象没有指定名称的属性时，才会被调用，是一种后备机制</strong>（备胎？）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Vector 类中新增类属性 shortcut_names 和特殊方法 __getattr__</span></span><br><span class="line"></span><br><span class="line">shortcut_names = <span class="string">'xyzt'</span>   <span class="comment"># 四个字母分别代表序列的前四个元素</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">    cls = type(self)</span><br><span class="line">    <span class="keyword">if</span> len(name) == <span class="number">1</span>:</span><br><span class="line">        pos = cls.shortcut_names.find(name)</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= pos &lt; len(self._components):</span><br><span class="line">            <span class="keyword">return</span> self._components[pos]</span><br><span class="line">    msg = <span class="string">'&#123;.__name__!r&#125; object has no attribute &#123;!r&#125;'</span></span><br><span class="line">    <span class="keyword">raise</span> AttributeError(msg.format(cls, name))</span><br></pre></td></tr></table></figure>
+<p>如果对 xyzt 中的一个属性赋值，会导致对象拥有该属性，导致矛盾，所以应对单小写字母属性赋值需要抛出异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Vector 类中新增特殊方法 __setattr__</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, name, value)</span>:</span></span><br><span class="line">    cls = type(self)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> len(name) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> name <span class="keyword">in</span> cls.shortcut_names:</span><br><span class="line">            error = <span class="string">'readonly attribute &#123;attr_name!r&#125;'</span></span><br><span class="line">        <span class="keyword">elif</span> name.islower():</span><br><span class="line">            error = <span class="string">"cant't set attributes 'a' to 'z' in &#123;cls_name!r&#125;"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            error = <span class="string">''</span></span><br><span class="line">        <span class="keyword">if</span> error:</span><br><span class="line">            msg = error.format(attr_name=name, cls_name=cls.__name__)</span><br><span class="line">            <span class="keyword">raise</span> AttributeError(msg)</span><br><span class="line">    super().__setattr__(name, value)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>super()</code> 用于动态访问超类的方法，把子类方法的某些任务委托给超类中的适当方法（多重继承导致 <code>super()</code> 的诞生）</p>
+</blockquote>
+<p><strong>为了防止对象行为不一致，如果实现了 <code>__getattr__</code> 方法，也要实现 <code>__setattr__</code> 方法</strong></p>
+<p><strong><em>完整代码和测试最后给出</em></strong></p>
+<h2 id="5、散列和快速等值"><a href="#5、散列和快速等值" class="headerlink" title="5、散列和快速等值"></a>5、散列和快速等值</h2><p>可散列需要实现 <code>__eq__</code> 和 <code>__hash__</code> 方法，前者已经实现，后者返回所有分量的散列值异或，使用 <code>reduce()</code> 方法。<br>PS：<code>reduce()</code> 方法最好提供第三个参数，即归约的初始值，这样序列为空不会出现异常，而是返回该初始值；异或可以使用 <code>operator</code> 模块中的 <code>xor</code> 方法，避免使用 <code>lambda</code> 表达式，<code>operator</code> 模块以函数的形式提供了 Python 中的全部中缀运算符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Vector 类中新增 __hash__ 方法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"></span><br><span class="line"><span class="comment"># 映射归约</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__hash__</span><span class="params">(self)</span>:</span></span><br><span class="line">    hashes = (hash(x) <span class="keyword">for</span> x <span class="keyword">in</span> self._components)  <span class="comment"># hashes = map(hash, self._components)  惰性，按需产出值</span></span><br><span class="line">    <span class="keyword">return</span> reduce(operator.xor, hashes, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>已实现的 <code>__eq__</code> 方法是将任务委托给 <code>tuple</code>，这在 Vector 分量很多时效率很低，所以重写一个效率较高的等值方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(self) != len(other):</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">for</span> a, b <span class="keyword">in</span> zip(self, other):</span><br><span class="line">        <span class="keyword">if</span> a != b:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者可以用 all 方法进行归约</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> len(self) == len(other) <span class="keyword">and</span> all(a == b <span class="keyword">for</span> a, b <span class="keyword">in</span> zip(self, other))</span><br></pre></td></tr></table></figure>
+<p><strong><em>完整代码和测试最后给出</em></strong></p>
+<h2 id="6、格式化"><a href="#6、格式化" class="headerlink" title="6、格式化"></a>6、格式化</h2><p>自定义格式代码 ‘h’（避免重用内置类型支持的格式代码），重写 <code>__format__</code> 方法。与二维的极坐标类似，该自定义格式返回对象的超球体坐标（<code>&lt;r, angle1, angle2, ...&gt;</code>）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Vector 类中新增 __format__ 方法和辅助方法 angle 和 angles</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 超球体某个角坐标</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">angle</span><span class="params">(self, n)</span>:</span></span><br><span class="line">    r = abs(self)</span><br><span class="line">    a = math.atan2(r, self[n<span class="number">-1</span>])</span><br><span class="line">    <span class="keyword">if</span> n == len(self) - <span class="number">1</span> <span class="keyword">and</span> self[<span class="number">-1</span>] &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> math.pi * <span class="number">2</span> - a</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">angles</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (self.angle(n) <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">1</span>, len(self)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__format__</span><span class="params">(self, fmt_spec=<span class="string">''</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> fmt_spec.endswith(<span class="string">'h'</span>):</span><br><span class="line">        fmt_spec = fmt_spec[:<span class="number">-1</span>]</span><br><span class="line">        coords = itertools.chain([abs(self)], self.angles())</span><br><span class="line">        outer_fmt = <span class="string">'&lt;&#123;&#125;&gt;'</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        coords = self</span><br><span class="line">        outer_fmt = <span class="string">'(&#123;&#125;)'</span></span><br><span class="line">    components = (format(c, fmt_spec) <span class="keyword">for</span> c <span class="keyword">in</span> coords)</span><br><span class="line">    <span class="keyword">return</span> outer_fmt.format(<span class="string">', '</span>.join(components))</span><br></pre></td></tr></table></figure>
+<p><strong><em>完整代码和测试最后给出</em></strong></p>
+<h1 id="完整代码及测试"><a href="#完整代码及测试" class="headerlink" title="完整代码及测试"></a>完整代码及测试</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> array <span class="keyword">import</span> array</span><br><span class="line"><span class="keyword">import</span> reprlib</span><br><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> numbers</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vector</span>:</span></span><br><span class="line">    typecode = <span class="string">'d'</span></span><br><span class="line">    shortcut_names = <span class="string">'xyzt'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, components)</span>:</span></span><br><span class="line">        self._components = array(self.typecode, components)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> iter(self._components)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        components = reprlib.repr(self._components)</span><br><span class="line">        components = components[components.find(<span class="string">'['</span>):<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Vector(&#123;&#125;)'</span>.format(components)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> str(tuple(self))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__bytes__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> bytes([ord(self.typecode)]) + bytes(self._components)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self) == len(other) <span class="keyword">and</span> all(a == b <span class="keyword">for</span> a, b <span class="keyword">in</span> zip(self, other))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__hash__</span><span class="params">(self)</span>:</span></span><br><span class="line">        hashes = (hash(x) <span class="keyword">for</span> x <span class="keyword">in</span> self)</span><br><span class="line">        <span class="keyword">return</span> functools.reduce(operator.xor, hashes, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__abs__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> math.sqrt(sum(x * x <span class="keyword">for</span> x <span class="keyword">in</span> self))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__bool__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> bool(abs(self))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self._components)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        cls = type(self)</span><br><span class="line">        <span class="keyword">if</span> isinstance(index, slice):</span><br><span class="line">            <span class="keyword">return</span> cls(self._components[index])</span><br><span class="line">        <span class="keyword">elif</span> isinstance(index, numbers.Integral):</span><br><span class="line">            <span class="keyword">return</span> self._components[index]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            msg = <span class="string">'&#123;.__name__&#125; indices must be integers'</span></span><br><span class="line">            <span class="keyword">raise</span> TypeError(msg.format(cls))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        cls = type(self)</span><br><span class="line">        <span class="keyword">if</span> len(name) == <span class="number">1</span>:</span><br><span class="line">            pos = cls.shortcut_names.find(name)</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= pos &lt; len(self._components):</span><br><span class="line">                <span class="keyword">return</span> self._components[pos]</span><br><span class="line">        msg = <span class="string">'&#123;.__name__!r&#125; objects has no attribute &#123;!r&#125;'</span></span><br><span class="line">        <span class="keyword">raise</span> AttributeError(msg.format(cls, name))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, name, value)</span>:</span></span><br><span class="line">        cls = type(self)</span><br><span class="line">        <span class="keyword">if</span> len(name) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> name <span class="keyword">in</span> cls.shortcut_names:</span><br><span class="line">                error = <span class="string">'readonly attribute &#123;attr_name!r&#125;'</span></span><br><span class="line">            <span class="keyword">elif</span> name.islower():</span><br><span class="line">                error = <span class="string">"can't set attributes 'a' to 'z' in &#123;cls_name!r&#125;"</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                error = <span class="string">''</span></span><br><span class="line">            <span class="keyword">if</span> error:</span><br><span class="line">                msg = error.format(cls_name=cls.__name__, attr_name=name)</span><br><span class="line">                <span class="keyword">raise</span> AttributeError(msg)</span><br><span class="line">        super().__setattr__(name, value)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">angle</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        r = abs(self)</span><br><span class="line">        a = math.atan2(r, self[n<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">if</span> n == len(self) - <span class="number">1</span> <span class="keyword">and</span> self[<span class="number">-1</span>] &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> math.pi * <span class="number">2</span> - a</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">angles</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> (self.angle(n) <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">1</span>, len(self)))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__format__</span><span class="params">(self, fmt_spec=<span class="string">''</span>)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> fmt_spec.endswith(<span class="string">'h'</span>):</span><br><span class="line">            fmt_spec = fmt_spec[:<span class="number">-1</span>]</span><br><span class="line">            coords = itertools.chain([abs(self)], self.angles())</span><br><span class="line">            outer_fmt = <span class="string">'&lt;&#123;&#125;&gt;'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            coords = self</span><br><span class="line">            outer_fmt = <span class="string">'(&#123;&#125;)'</span></span><br><span class="line">        components = (format(c, fmt_spec) <span class="keyword">for</span> c <span class="keyword">in</span> coords)</span><br><span class="line">        <span class="keyword">return</span> outer_fmt.format(<span class="string">', '</span>.join(components))</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">frombytes</span><span class="params">(cls, octets)</span>:</span></span><br><span class="line">        typecode = chr(octets[<span class="number">0</span>])</span><br><span class="line">        memv = memoryview(octets[<span class="number">1</span>:]).cast(typecode)</span><br><span class="line">        <span class="keyword">return</span> cls(memv)</span><br></pre></td></tr></table></figure>
+<h3 id="1-实例化测试"><a href="#1-实例化测试" class="headerlink" title="1. 实例化测试"></a>1. 实例化测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector([<span class="number">3.1</span>, <span class="number">4.2</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([3.1, 4.2])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([3.0, 4.0, 5.0])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vector(range(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([0.0, 1.0, 2.0, 3.0, 4.0, ...])
+</code></pre><h3 id="2-二维向量测试"><a href="#2-二维向量测试" class="headerlink" title="2. 二维向量测试"></a>2. 二维向量测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v1 = Vector([<span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">x, y = v1</span><br><span class="line">x, y</span><br></pre></td></tr></table></figure>
+<pre><code>(3.0, 4.0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([3.0, 4.0])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v1_clone = eval(repr(v1))</span><br><span class="line">v1 == v1_clone</span><br></pre></td></tr></table></figure>
+<pre><code>True
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(v1)</span><br></pre></td></tr></table></figure>
+<pre><code>(3.0, 4.0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">octets = bytes(v1)</span><br><span class="line">octets</span><br></pre></td></tr></table></figure>
+<pre><code>b&apos;d\x00\x00\x00\x00\x00\x00\x08@\x00\x00\x00\x00\x00\x00\x10@&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abs(v1)</span><br></pre></td></tr></table></figure>
+<pre><code>5.0
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool(v1), bool(Vector([<span class="number">0</span>, <span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<pre><code>(True, False)
+</code></pre><h3 id="3-三维向量测试"><a href="#3-三维向量测试" class="headerlink" title="3. 三维向量测试"></a>3. 三维向量测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v1 = Vector([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">x, y, z = v1</span><br><span class="line">x, y, z</span><br></pre></td></tr></table></figure>
+<pre><code>(3.0, 4.0, 5.0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([3.0, 4.0, 5.0])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v1_clone = eval(repr(v1))</span><br><span class="line">v1 == v1_clone</span><br></pre></td></tr></table></figure>
+<pre><code>True
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(v1)</span><br></pre></td></tr></table></figure>
+<pre><code>(3.0, 4.0, 5.0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abs(v1)</span><br></pre></td></tr></table></figure>
+<pre><code>7.0710678118654755
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool(v1), bool(Vector([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<pre><code>(True, False)
+</code></pre><h3 id="4-多维向量测试"><a href="#4-多维向量测试" class="headerlink" title="4. 多维向量测试"></a>4. 多维向量测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v7 = Vector(range(<span class="number">7</span>))</span><br><span class="line">v7</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([0.0, 1.0, 2.0, 3.0, 4.0, ...])
+</code></pre><h3 id="5-字节测试和字节构造方法测试"><a href="#5-字节测试和字节构造方法测试" class="headerlink" title="5. 字节测试和字节构造方法测试"></a>5. 字节测试和字节构造方法测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v1 = Vector([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">v1_clone = Vector.frombytes(bytes(v1))</span><br><span class="line">v1_clone</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([3.0, 4.0, 5.0])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1 == v1_clone</span><br></pre></td></tr></table></figure>
+<pre><code>True
+</code></pre><h3 id="6-序列测试（长度，索引，切片）"><a href="#6-序列测试（长度，索引，切片）" class="headerlink" title="6. 序列测试（长度，索引，切片）"></a>6. 序列测试（长度，索引，切片）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v1 = Vector([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">len(v1)</span><br></pre></td></tr></table></figure>
+<pre><code>3
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1[<span class="number">0</span>], v1[len(v1)<span class="number">-1</span>], v1[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>(3.0, 5.0, 5.0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v7 = Vector(range(<span class="number">7</span>))</span><br><span class="line">v7[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>6.0
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v7[<span class="number">1</span>:<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([1.0, 2.0, 3.0])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v7[<span class="number">-1</span>:]</span><br></pre></td></tr></table></figure>
+<pre><code>Vector([6.0])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v7[<span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-47-54e115c7e17b&gt; in &lt;module&gt;()
+----&gt; 1 v7[1, 2]
+
+
+&lt;ipython-input-22-677e1f3d7f64&gt; in __getitem__(self, index)
+     52         else:
+     53             msg = &apos;{.__name__} indices must be integers&apos;
+---&gt; 54             raise TypeError(msg.format(cls))
+     55 
+     56     def __getattr__(self, name):
+
+
+TypeError: Vector indices must be integers
+</code></pre><h3 id="7-动态属性测试"><a href="#7-动态属性测试" class="headerlink" title="7. 动态属性测试"></a>7. 动态属性测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v7 = Vector(range(<span class="number">10</span>))</span><br><span class="line">v7.x,  v7.y,  v7.z,  v7.t</span><br></pre></td></tr></table></figure>
+<pre><code>(0.0, 1.0, 2.0, 3.0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v7.k</span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+AttributeError                            Traceback (most recent call last)
+
+&lt;ipython-input-49-70ed3a6fcb8f&gt; in &lt;module&gt;()
+----&gt; 1 v7.k
+
+
+&lt;ipython-input-22-677e1f3d7f64&gt; in __getattr__(self, name)
+     61                 return self._components[pos]
+     62         msg = &apos;{.__name__!r} objects has no attribute {!r}&apos;
+---&gt; 63         raise AttributeError(msg.format(cls, name))
+     64 
+     65     def __setattr__(self, name, value):
+
+
+AttributeError: &apos;Vector&apos; objects has no attribute &apos;k&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v7.x = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+AttributeError                            Traceback (most recent call last)
+
+&lt;ipython-input-50-bd2e4daceec7&gt; in &lt;module&gt;()
+----&gt; 1 v7.x = 2
+
+
+&lt;ipython-input-22-677e1f3d7f64&gt; in __setattr__(self, name, value)
+     74             if error:
+     75                 msg = error.format(cls_name=cls.__name__, attr_name=name)
+---&gt; 76                 raise AttributeError(msg)
+     77         super().__setattr__(name, value)
+     78 
+
+
+AttributeError: readonly attribute &apos;x&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v7.k = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+AttributeError                            Traceback (most recent call last)
+
+&lt;ipython-input-51-b010ed8b3ae4&gt; in &lt;module&gt;()
+----&gt; 1 v7.k = 2
+
+
+&lt;ipython-input-22-677e1f3d7f64&gt; in __setattr__(self, name, value)
+     74             if error:
+     75                 msg = error.format(cls_name=cls.__name__, attr_name=name)
+---&gt; 76                 raise AttributeError(msg)
+     77         super().__setattr__(name, value)
+     78 
+
+
+AttributeError: can&apos;t set attributes &apos;a&apos; to &apos;z&apos; in &apos;Vector&apos;
+</code></pre><h3 id="8-散列测试"><a href="#8-散列测试" class="headerlink" title="8. 散列测试"></a>8. 散列测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v1 = Vector([<span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">v2 = Vector([<span class="number">3.1</span>, <span class="number">4.2</span>])</span><br><span class="line">v3 = Vector([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">v6 = Vector(range(<span class="number">6</span>))</span><br><span class="line">hash(v1), hash(v3), hash(v6)</span><br></pre></td></tr></table></figure>
+<pre><code>(7, 2, 1)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 32 位和 64 位机器上对 v2 的哈希值不一样</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">hash(v2) == (<span class="number">384307168202284039</span> <span class="keyword">if</span> sys.maxsize &gt; <span class="number">2</span> ** <span class="number">32</span> <span class="keyword">else</span> <span class="number">357915986</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>True
+</code></pre><h3 id="9-格式化测试"><a href="#9-格式化测试" class="headerlink" title="9. 格式化测试"></a>9. 格式化测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v1 = Vector([<span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">format(v1)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;(3.0, 4.0)&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format(v1, <span class="string">'.2f'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;(3.00, 4.00)&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format(v1, <span class="string">'.3e'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;(3.000e+00, 4.000e+00)&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v3 = Vector([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">v7 = Vector(range(<span class="number">7</span>))</span><br><span class="line">format(v3), format(v7)</span><br></pre></td></tr></table></figure>
+<pre><code>(&apos;(3.0, 4.0, 5.0)&apos;, &apos;(0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0)&apos;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format(v1, <span class="string">'h'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;&lt;5.0, 1.0303768265243125&gt;&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format(v1, <span class="string">'.3eh'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;&lt;5.000e+00, 1.030e+00&gt;&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format(v1, <span class="string">'0.5fh'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;&lt;5.00000, 1.03038&gt;&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format(v7, <span class="string">'.3eh'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;&lt;9.539e+00, 1.571e+00, 1.466e+00, 1.364e+00, 1.266e+00, 1.174e+00, 1.088e+00&gt;&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format(v7, <span class="string">'0.5fh'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;&lt;9.53939, 1.57080, 1.46635, 1.36413, 1.26610, 1.17375, 1.08802&gt;&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format(Vector([<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>]), <span class="string">'h'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;&lt;2.0, 2.0344439357957027, 2.0344439357957027, 4.2487413713838835&gt;&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format(Vector([<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>]), <span class="string">'0.5fh'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;&lt;1.00000, 1.57080, 0.78540, 1.57080&gt;&apos;
+</code></pre><p><br></p>
+<p><a href="https://nbviewer.jupyter.org/github/sxnys/mypython/blob/master/FluentPython/10_Sequence_Hacking_Hashing_Slicing/1_Sequence_Hacking_Hashing_Slicing.ipynb" target="_blank" rel="noopener">md效果不好，原先是 jupyter notebook 版本</a></p>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2019/04/04/13_剑指Offer/" title="剑指Offer">剑指Offer</a></h2>
+                <p class="excerpt">
+                
+                所有题目思路和示例代码都在本人的 GitHub，不断更新中。
+1. 二维数组中的查找
+2. 替换空格
+3. 从头到尾打印列表
+4. 重建二叉树
+5. 用两个栈实现队列
+6. 旋转数组的最小数字
+61. 序列化二叉树
+
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2019-04-04T06:59:31.174Z" class="post-list__meta--date date">2019-04-04</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/刷题/">刷题</a>, <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>, <a class="tag-link" href="/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/tags/笔试/">笔试</a>, <a class="tag-link" href="/tags/算法/">算法</a>
+</span><a class="btn-border-small" href="/2019/04/04/13_剑指Offer/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2019 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+    
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
