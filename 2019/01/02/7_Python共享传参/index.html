@@ -193,27 +193,17 @@ True
                
             <div class="read-more-item">
                 <span class="read-more-item-dim">Newer Post</span>
-                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/6_Python的复制（拷贝）问题/" title="Python的复制（拷贝）问题">Python的复制（拷贝）问题</a></h2>
+                <h2 class="post-list__post-title post-title"><a href="/2019/03/20/11_计算机操作系统 - 内存管理/" title="计算机操作系统 - 内存管理">计算机操作系统 - 内存管理</a></h2>
                 <p class="excerpt">
                 
-                
+                摘自 github CS-Notes - 计算机操作系统
 
-深浅复制的讨论是基于可变类型的
-
-
-浅复制 复制最外层容器，副本中的元素是源容器中元素的引用 列表浅复制包括 ——   
-
-构造方法
-[:] 切片赋值
-自身的 copy 方法
-copy 模块的 copy 方法
-
-1234567891011121314l1 = [1, 2, [3, 4], (5,
+一、虚拟内存将物理内存抽象为地址空间，每个进程都有各自的地址空间，地址空间被分割成多个块，每一块称为一页。这些页被映射到物理内存，但不需要映射到连续的物理内存，也不需要所有页都必须在物理内存中。目的是让物理内存扩充成更大的逻辑内存，从而让程
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
-</span><a class="btn-border-small" href="/2019/01/02/6_Python的复制（拷贝）问题/">继续阅读</a></div>
+                <div class="post-list__meta"><time datetime="2019-03-20T05:05:37.781Z" class="post-list__meta--date date">2019-03-20</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/操作系统/">操作系统</a>
+</span><a class="btn-border-small" href="/2019/03/20/11_计算机操作系统 - 内存管理/">继续阅读</a></div>
                            
             </div>
         
@@ -221,20 +211,20 @@ copy 模块的 copy 方法
                
             <div class="read-more-item">
                 <span class="read-more-item-dim">Older Post</span>
-                <h2 class="post-list__post-title post-title"><a href="/2018/12/27/4_计算机操作系统 - 概述/" title="计算机操作系统 - 概述">计算机操作系统 - 概述</a></h2>
+                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/8_Python垃圾回收和弱引用/" title="Python垃圾回收和弱引用">Python垃圾回收和弱引用</a></h2>
                 <p class="excerpt">
                 
-                摘自 github CS-Notes - 计算机操作系统
+                
+垃圾回收
+引用计数 ：CPython 中的主要垃圾回收算法，每个对象都会统计有多少引用指向自己；当引用计数归零时，对象立即销毁。
+分代垃圾回收 ：CPython 2.0 增加的新的算法，用于检测引用循环中涉及的对象组    
 
-一、基本功能1. 内存管理 *内存分配、地址映射、内存保护与共享、虚拟内存、…
-2. 进程管理 *进程控制、进程同步、进程通信、死锁处理、处理机调度、…
-3. 文件管理文件存储空间管理、目录管理、文件读写管理和保护、…
-4. 设备管理缓冲管
+即将销毁实例时，解释器会调用 __del__ 方法，给实例最后的机会，
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2018-12-27T11:44:31.840Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/操作系统/">操作系统</a>
-</span><a class="btn-border-small" href="/2018/12/27/4_计算机操作系统 - 概述/">继续阅读</a></div>
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2019/01/02/8_Python垃圾回收和弱引用/">继续阅读</a></div>
                        
             </div>
         
