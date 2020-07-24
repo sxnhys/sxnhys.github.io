@@ -67,7 +67,7 @@
           <div>
           <nav class="cover-navigation cover-navigation--primary">
             <ul class="navigation">
-              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">文字阁</a></li>
             
             </ul>
           </nav>
@@ -79,7 +79,7 @@
   <!-- Weibo-->
   
   <li class="navigation__item">
-    <a href="https://weibo.com/u/3926121193" title="Weibo" target="_blank">
+    <a href="https://weibo.com/u/3926121193" title="我的微博" target="_blank">
       <i class="social fa fa-weibo"></i>
       <span class="label">Weibo</span>
     </a>
@@ -89,7 +89,7 @@
   <!-- Github -->
   
   <li class="navigation__item">
-    <a href="https://github.com/sxnys" title="GitHub" target="_blank">
+    <a href="https://github.com/sxnys" title="查看我的GitHub主页" target="_blank">
       <i class="social fa fa-github"></i>
       <span class="label">Github</span>
     </a>
@@ -234,20 +234,20 @@
   
     
     <li>
-      <h2 class="post-list__post-title post-title"><a href="/2019/01/02/5_Python变量/" title="Python变量">Python变量</a></h2>
+      <h2 class="post-list__post-title post-title"><a href="/2019/01/02/7_Python共享传参/" title="Python共享传参">Python共享传参</a></h2>
       <p class="excerpt">
     
       
-变量
-Python中，变量只是一个标注（标签），而不是一个盒子（box）。    
+函数的参数作为引用
+Python 唯一支持的参数传递是 共享传参 ，也就是常说的引用传参。函数内部的形参是实参的别名
 
-Python中的变量类似于C++、Java等中的引用变量。Important! 这里谈到的变量是容器序列（list、tuple、dict、set …），扁平序列（str、bytes …）有所不同。
-翻译一下就是，这里有一个装着变量 的盒子，你可以给这个盒子起名为a、py、sxn、…，想起多少个起多少个（只要你能
+123def f(a, b):    a += b    return a
+1234567891011121314# 数字，不变x, y = 1, 2f(x, y)print(x, y)# 列表可变类型，变了x, y = [1, 2], [3, 4]f(x, y)print(x
     &hellip;
       </p>
       <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i>
   <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
-</span><a class="btn-border-small" href="/2019/01/02/5_Python变量/">继续阅读</a></div>
+</span><a class="btn-border-small" href="/2019/01/02/7_Python共享传参/">继续阅读</a></div>
       <hr class="post-list__divider">
     </li>
   
@@ -292,20 +292,21 @@ Python数据模型其实就是 对象模型，数据模型是对Python框架的�
   
     
     <li>
-      <h2 class="post-list__post-title post-title"><a href="/2019/01/02/7_Python共享传参/" title="Python共享传参">Python共享传参</a></h2>
+      <h2 class="post-list__post-title post-title"><a href="/2019/01/02/8_Python垃圾回收和弱引用/" title="Python垃圾回收和弱引用">Python垃圾回收和弱引用</a></h2>
       <p class="excerpt">
     
       
-函数的参数作为引用
-Python 唯一支持的参数传递是 共享传参 ，也就是常说的引用传参。函数内部的形参是实参的别名
+垃圾回收
+引用计数 ：CPython 中的主要垃圾回收算法，每个对象都会统计有多少引用指向自己；当引用计数归零时，对象立即销毁。
+分代垃圾回收 ：CPython 2.0 增加的新的算法，用于检测引用循环中涉及的对象组    
 
-123def f(a, b):    a += b    return a
-1234567891011121314# 数字，不变x, y = 1, 2f(x, y)print(x, y)# 列表可变类型，变了x, y = [1, 2], [3, 4]f(x, y)print(x
+即将销毁实例时，解释器会调用 __del__ 方法，给实例最后的机会，释放外部资源，但它不会销毁实例。
+deldel 语句删除的是名称，而不是对象。但是在两种情况下可能会
     &hellip;
       </p>
       <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i>
   <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
-</span><a class="btn-border-small" href="/2019/01/02/7_Python共享传参/">继续阅读</a></div>
+</span><a class="btn-border-small" href="/2019/01/02/8_Python垃圾回收和弱引用/">继续阅读</a></div>
       <hr class="post-list__divider">
     </li>
   
@@ -343,7 +344,7 @@ copy 模块的 copy 方法
     
     <span class="pagination__page-number">  1 / 2 </span>
     
-      <a class="older-posts pagination__older btn btn-small btn-tertiary" href="/archives/2019/page/2/">Next &rarr;</a>
+      <a class="older-posts pagination__older btn btn-small btn-tertiary" href="/archives/2019/page/2/">更早 &rarr;</a>
     
   </nav>
 
