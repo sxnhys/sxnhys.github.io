@@ -131,7 +131,7 @@
 
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2018-12-27T11:44:31.840Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-meta__tags tags">于 
+      <time datetime="2018-12-27T11:44:31.840Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-meta__tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i> 
   <a class="tag-link" href="/tags/操作系统/">操作系统</a>
  </span>
       <span class="page-pv">
@@ -180,20 +180,20 @@
                
             <div class="read-more-item">
                 <span class="read-more-item-dim">Newer Post</span>
-                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/9_符合Python风格的对象/" title="符合Python风格的对象">符合Python风格的对象</a></h2>
+                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/8_Python垃圾回收和弱引用/" title="Python垃圾回收和弱引用">Python垃圾回收和弱引用</a></h2>
                 <p class="excerpt">
                 
                 
-基于 Python 的数据模型，自定义类型可以实现和内置类型一样自然的行为，实际上靠的是 鸭子类型。
+垃圾回收
+引用计数 ：CPython 中的主要垃圾回收算法，每个对象都会统计有多少引用指向自己；当引用计数归零时，对象立即销毁。
+分代垃圾回收 ：CPython 2.0 增加的新的算法，用于检测引用循环中涉及的对象组    
 
-鸭子类型：按照预定行为实现对象所需的方法
-
-0、最初的Vector类12345678910111213141516171819202122from math import hypot 	 # 两
+即将销毁实例时，解释器会调用 __del__ 方法，给实例最后的机会，
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i> 
   <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
-</span><a class="btn-border-small" href="/2019/01/02/9_符合Python风格的对象/">继续阅读</a></div>
+</span><a class="btn-border-small" href="/2019/01/02/8_Python垃圾回收和弱引用/">继续阅读</a></div>
                            
             </div>
         
@@ -212,7 +212,7 @@
 多进程过去的单核CPU，也可以执行多任务，表面上每个任务都是交替执行的，但是由于CPU的执行速度太快，感觉就像所有任
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2018-12-27T11:40:41.243Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
+                <div class="post-list__meta"><time datetime="2018-12-27T11:40:41.243Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i> 
   <a class="tag-link" href="/tags/Python/">Python</a>
 </span><a class="btn-border-small" href="/2018/12/27/3_Python多线程、多进程、协程/">继续阅读</a></div>
                        
@@ -224,11 +224,13 @@
   
 </section>
 
+
   
+
 
             <footer class="footer">
     <span class="footer__copyright">
-        &copy; 2019 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+        &copy; 2020 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
        
     </span>
     <span class="footer__copyright">

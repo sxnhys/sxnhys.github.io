@@ -131,7 +131,7 @@
 
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-meta__tags tags">于 
+      <time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-meta__tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i> 
   <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
  </span>
       <span class="page-pv">
@@ -191,7 +191,7 @@ Python中的变量类似于C++、Java等中的引用变量。Important! 这里�
 翻译一下就是，
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i> 
   <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
 </span><a class="btn-border-small" href="/2019/01/02/5_Python变量/">继续阅读</a></div>
                            
@@ -201,27 +201,20 @@ Python中的变量类似于C++、Java等中的引用变量。Important! 这里�
                
             <div class="read-more-item">
                 <span class="read-more-item-dim">Older Post</span>
-                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/6_Python的复制（拷贝）问题/" title="Python的复制（拷贝）问题">Python的复制（拷贝）问题</a></h2>
+                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/9_符合Python风格的对象/" title="符合Python风格的对象">符合Python风格的对象</a></h2>
                 <p class="excerpt">
                 
                 
+基于 Python 的数据模型，自定义类型可以实现和内置类型一样自然的行为，实际上靠的是 鸭子类型。
 
-深浅复制的讨论是基于可变类型的
+鸭子类型：按照预定行为实现对象所需的方法
 
-
-浅复制 复制最外层容器，副本中的元素是源容器中元素的引用 列表浅复制包括 ——   
-
-构造方法
-[:] 切片赋值
-自身的 copy 方法
-copy 模块的 copy 方法
-
-1234567891011121314l1 = [1, 2, [3, 4], (5,
+0、最初的Vector类12345678910111213141516171819202122from math import hypot 	 # 两
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i> 
   <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
-</span><a class="btn-border-small" href="/2019/01/02/6_Python的复制（拷贝）问题/">继续阅读</a></div>
+</span><a class="btn-border-small" href="/2019/01/02/9_符合Python风格的对象/">继续阅读</a></div>
                        
             </div>
         
@@ -231,11 +224,13 @@ copy 模块的 copy 方法
   
 </section>
 
+
   
+
 
             <footer class="footer">
     <span class="footer__copyright">
-        &copy; 2019 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+        &copy; 2020 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
        
     </span>
     <span class="footer__copyright">

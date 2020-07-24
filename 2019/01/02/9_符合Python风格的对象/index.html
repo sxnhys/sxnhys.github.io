@@ -131,7 +131,7 @@
 
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-meta__tags tags">于 
+      <time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-meta__tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i> 
   <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
  </span>
       <span class="page-pv">
@@ -409,27 +409,21 @@ AttributeError: can&apos;t set attribute
                
             <div class="read-more-item">
                 <span class="read-more-item-dim">Newer Post</span>
-                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/6_Python的复制（拷贝）问题/" title="Python的复制（拷贝）问题">Python的复制（拷贝）问题</a></h2>
+                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/1_Python数据模型/" title="Python数据模型">Python数据模型</a></h2>
                 <p class="excerpt">
                 
                 
 
-深浅复制的讨论是基于可变类型的
+理解好Python的数据模型才是真正理解了Python这门语言
 
 
-浅复制 复制最外层容器，副本中的元素是源容器中元素的引用 列表浅复制包括 ——   
 
-构造方法
-[:] 切片赋值
-自身的 copy 方法
-copy 模块的 copy 方法
-
-1234567891011121314l1 = [1, 2, [3, 4], (5,
+Python数据模型其实就是 对象模型，数据模型是对Python框架的描述，规范了Python自身构建模块的接口，数据模型体现了Python的设计思想，理解好就能写出 Pythonic 代码。类似于经常用到的 len(some
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags">于 
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i> 
   <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
-</span><a class="btn-border-small" href="/2019/01/02/6_Python的复制（拷贝）问题/">继续阅读</a></div>
+</span><a class="btn-border-small" href="/2019/01/02/1_Python数据模型/">继续阅读</a></div>
                            
             </div>
         
@@ -437,20 +431,20 @@ copy 模块的 copy 方法
                
             <div class="read-more-item">
                 <span class="read-more-item-dim">Older Post</span>
-                <h2 class="post-list__post-title post-title"><a href="/2018/12/27/4_计算机操作系统 - 概述/" title="计算机操作系统 - 概述">计算机操作系统 - 概述</a></h2>
+                <h2 class="post-list__post-title post-title"><a href="/2019/01/02/7_Python共享传参/" title="Python共享传参">Python共享传参</a></h2>
                 <p class="excerpt">
                 
-                摘自 github CS-Notes - 计算机操作系统
+                
+函数的参数作为引用
+Python 唯一支持的参数传递是 共享传参 ，也就是常说的引用传参。函数内部的形参是实参的别名
 
-一、基本功能1. 内存管理 *内存分配、地址映射、内存保护与共享、虚拟内存、…
-2. 进程管理 *进程控制、进程同步、进程通信、死锁处理、处理机调度、…
-3. 文件管理文件存储空间管理、目录管理、文件读写管理和保护、…
-4. 设备管理缓冲管
+123def f(a, b):    a += b    return a
+1234567891011121314# 数字，不变x, y = 1, 2f(x, y)print(x
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2018-12-27T11:44:31.840Z" class="post-list__meta--date date">2018-12-27</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/操作系统/">操作系统</a>
-</span><a class="btn-border-small" href="/2018/12/27/4_计算机操作系统 - 概述/">继续阅读</a></div>
+                <div class="post-list__meta"><time datetime="2019-01-02T11:29:27.564Z" class="post-list__meta--date date">2019-01-02</time> &#8226; <span class="post-list__meta--tags tags"><i class="fa fa-tag" style="font-size: 12px;"></i> 
+  <a class="tag-link" href="/tags/Fluent-Python/">Fluent Python</a>, <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2019/01/02/7_Python共享传参/">继续阅读</a></div>
                        
             </div>
         
@@ -460,11 +454,13 @@ copy 模块的 copy 方法
   
 </section>
 
+
   
+
 
             <footer class="footer">
     <span class="footer__copyright">
-        &copy; 2019 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+        &copy; 2020 Sxnys - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
        
     </span>
     <span class="footer__copyright">
